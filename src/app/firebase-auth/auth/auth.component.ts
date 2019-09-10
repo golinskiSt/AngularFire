@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFirestore, validateEventsArray  } from '@angular/fire/firestore';
+import { fbind } from 'q';
 
 @Component({
   selector: 'app-auth',
@@ -8,20 +10,24 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  public form=new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
-  });
+  public form;
+  public submitted = false
+  constructor(
+    private fb: FormBuilder,
+    private auth: AngularFireAuth,
+    private db: AngularFirestore ) {   }
 
-  constructor(private auth: firebase.auth.EmailAuthProvider) {   }
-
-  ngOnInit() {  
-  }
-  getForm(){
-    return this.form;
+  ngOnInit() {
+    this.form = this.fb.group({
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', Validators.required)
+    });
   }
 
   onSubmit(){
-    this.auth.providerId
+    this.submitted = true;
+  }
+  get f() {
+    return this.form.controls;
   }
 }

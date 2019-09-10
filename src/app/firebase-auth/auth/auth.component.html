@@ -1,37 +1,38 @@
 <div class="container-fluid">
     <div class="row ">
-        <div class="col-sm-12 col-xl-12 col-md-6 col-lg-6 col-xl-6 m-auto d-flex">
+        <div class="col-sm-12 col-xl-12 col-md-12 col-lg-12 col-xl-6 m-auto d-flex">
             <div class="card">
               <div class="card-header bg">
                 <h3 class="text-light">Sign In</h3>
               </div>
               <div class="card-body dark-backgroud">
-                <form [formGroup]="form"  (ngSubmit)="onSubmit()">
-                  <div class="input-group form-group">  
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-user"></i></span>
+                <form [formGroup]="form" (submit)="onSubmit()">
+                  <div class="form-group">
+                    <input type="text" formControlName="email" class="form-control" placeholder="Email"
+                      [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                      <div *ngIf="f['email'].errors.required">Username is required</div>
+                      <div *ngIf="f['email'].errors.email">Email is not valid</div>
                     </div>
-                    <input type="text" class="form-control" placeholder="email" formcontrolName="email">
-                    
-                  </div>
-                  <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-key"></i></span>
-                    </div>
-                    <input type="password" class="form-control" placeholder="password" formcontrolName="password">
-                  </div>
-                  <div class="row align-items-center remember">
-                    <input type="checkbox">Remember Me
                   </div>
                   <div class="form-group">
-                    <button type="submit" [disabled]="!form.valid" class="btn float-right btn-primary">Login</button>
+                    <input type="password" formControlName="password" class="form-control" placeholder="Password"
+                      [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                      <div *ngIf="f['password'].errors.required">Password is required</div>
+                    </div>
                   </div>
+                  <button [disabled]="loading" class="btn btn-primary" type="submit">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Login
+                  </button>
+                  <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
                 </form>
               </div>
               <div class="card-footer">
                 <div class="d-flex justify-content-center links">
                   Don't have an account?<br>
-                  <a href="#">Sign Up</a>
+                  <a routerLink='/register'>Sign Up</a>
                 </div>
                 <div class="d-flex justify-content-center">
                   <a href="#">Forgot your password?</a>
