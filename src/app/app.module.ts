@@ -14,6 +14,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './firebase-auth/auth/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { environment } from 'src/environments/environment';
     AngularFireStorageModule
   ],
   providers: [
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

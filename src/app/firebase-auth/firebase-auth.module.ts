@@ -24,6 +24,6 @@ import { AuthService } from './auth/auth.service';
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
-  providers: [AuthService]
+  providers: []
 })
 export class FirebaseAuthModule { }

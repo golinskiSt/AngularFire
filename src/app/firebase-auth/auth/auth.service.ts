@@ -20,7 +20,7 @@ export class AuthService {
     });
   }
   async loginAsync(email: string, password: string) {
-    const result = await this.afAuth.auth.createUserWithEmailAndPassword(
+    const result = await this.afAuth.auth.signInWithEmailAndPassword(
       email,
       password
     );
