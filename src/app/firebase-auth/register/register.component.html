@@ -33,7 +33,8 @@
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                 Register
               </button>
-              <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+              <div *ngIf="success" class="alert alert-success mt-3 mb-0">Registration completed successfully</div>
+              <div *ngIf="errors" class="alert alert-danger mt-3 mb-0">{{errors.message}}</div>
             </form>
             </div>
           </div>

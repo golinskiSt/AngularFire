@@ -8,12 +8,14 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './auth/auth.service';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
   declarations: [
     AuthComponent,
-    RegisterComponent
+    RegisterComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,

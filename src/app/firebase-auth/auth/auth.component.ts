@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { Info } from '../Info';
 
 @Component({
   selector: 'app-auth',
@@ -10,8 +11,11 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
   public form;
+  public success = false;
   public submitted = false;
-  public error: string;
+  public errors: any;
+  public loading = false;
+  public send = false;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -26,16 +30,18 @@ export class AuthComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.loading = true;
     this.authService.loginAsync(
       this.form.controls.email.value,
       this.form.controls.password.value
     ).then(t => {
       window.location.reload();
       this.router.navigate(['/home']);
+      this.loading = false;
     })
     .catch(e => {
       console.error(e);
-      this.error = e.message;
+      this.errors = e.message;
     });
   }
   get f() {
